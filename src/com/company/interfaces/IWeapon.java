@@ -24,4 +24,5 @@ public interface IWeapon {
 
     void removeBonus(GemType gemType);
 
+    boolean isValidIndex(int socketIndex);
 }
