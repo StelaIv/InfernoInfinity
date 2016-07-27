@@ -3,6 +3,7 @@ package com.company.factory;
 import com.company.enums.GemType;
 import com.company.enums.WeaponType;
 import com.company.interfaces.IFactory;
+import com.company.interfaces.IWeapon;
 import com.company.models.Weapon;
 
 public class WeaponFactory implements IFactory {
@@ -17,7 +18,7 @@ public class WeaponFactory implements IFactory {
     }
 
     @Override
-    public void addGemsToWeapon(Weapon weapon, int socketIndex, GemType gemType) {
+    public void addGemsToWeapon(IWeapon weapon, int socketIndex, GemType gemType) {
         if (weapon.isValidIndex(socketIndex)) {
             if (weapon.getSockets()[socketIndex]!=null){
                 this.removeGemFromAWeapon(weapon,socketIndex);
@@ -27,7 +28,7 @@ public class WeaponFactory implements IFactory {
     }
 
     @Override
-    public void removeGemFromAWeapon(Weapon weapon, int socketIndex) {
+    public void removeGemFromAWeapon(IWeapon weapon, int socketIndex) {
         if (weapon.isValidIndex(socketIndex)) {
             GemType gemType = weapon.getSockets()[socketIndex];
             if (gemType != null) {
@@ -38,7 +39,7 @@ public class WeaponFactory implements IFactory {
     }
 
     @Override
-    public String printWeapon(Weapon weapon) {
+    public String printWeapon(IWeapon weapon) {
         return weapon.toString();
     }
 }
