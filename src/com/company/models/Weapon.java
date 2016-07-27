@@ -9,6 +9,7 @@ public class Weapon implements IWeapon {
     private static final int STRENGTH_BONUS_TO_MIN_DAMAGE = 2;
     private static final int STRENGTH_BONUS_TO_MAX_DAMAGE = 3;
     private static final int AGILITY_BONUS_TO_MAX_DAMAGE = 4;
+    private static final int DEFAULT_BONUS =0;
 
     private WeaponType weaponType;
     private String name;
@@ -22,9 +23,9 @@ public class Weapon implements IWeapon {
     public Weapon(WeaponType weaponType, String name) {
         this.setWeaponType(weaponType);
         this.setName(name);
-        this.strength = 0;
-        this.agility = 0;
-        this.vitality =0;
+        this.strength = DEFAULT_BONUS;
+        this.agility = DEFAULT_BONUS;
+        this.vitality =DEFAULT_BONUS;
         this.setSockets();
         this.minDamage = weaponType.getMinDamage();
         this.maxDamage = weaponType.getMaxDamage();
@@ -42,23 +43,23 @@ public class Weapon implements IWeapon {
         this.sockets = new GemType[weaponType.getNumberOfSockets()];
     }
 
-    protected void setStrength(int strength) {
+    private void setStrength(int strength) {
         this.strength = strength;
     }
 
-    protected void setAgility(int agility) {
+    private void setAgility(int agility) {
         this.agility = agility;
     }
 
-    protected void setVitality(int vitality) {
+    private void setVitality(int vitality) {
         this.vitality = vitality;
     }
 
-    protected void setMinDamage(int minDamage) {
+    private void setMinDamage(int minDamage) {
         this.minDamage = minDamage;
     }
 
-    protected void setMaxDamage(int maxDamage) {
+    private void setMaxDamage(int maxDamage) {
         this.maxDamage = maxDamage;
     }
 
