@@ -1,12 +1,9 @@
 package com.company;
 
-import com.company.interfaces.IEngine;
-import com.company.interfaces.IReader;
-import com.company.interfaces.IWriter;
+import com.company.interfaces.*;
 import com.company.models.Weapon;
 import com.company.enums.GemType;
 import com.company.enums.WeaponType;
-import com.company.interfaces.IFactory;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -16,7 +13,7 @@ public class Engine implements IEngine {
     private IFactory factory;
     private IReader reader;
     private IWriter writer;
-    private List<Weapon>weapons;
+    private List<IWeapon>weapons;
 
     public Engine(IFactory factory,IReader reader, IWriter writer) {
         this.setFactory(factory);
@@ -49,11 +46,11 @@ public class Engine implements IEngine {
             String[] commandArgs =command.split(";");
             switch (commandArgs[0]){
                 case"Create":
-                    Weapon  weapon = this.factory.createWeapon(WeaponType.valueOf(commandArgs[1]),commandArgs[2]);
+                    IWeapon weapon = this.factory.createWeapon(WeaponType.valueOf(commandArgs[1]),commandArgs[2]);
                     this.weapons.add(weapon);
                     break;
                 case"Add":
-                    for (Weapon weapon1 : this.weapons) {
+                    for (IWeapon weapon1 : this.weapons) {
                         if (weapon1.getName().equals(commandArgs[1])){
                             int index = Integer.parseInt(commandArgs[2]);
                             this.factory.addGemsToWeapon(weapon1,index, GemType.valueOf(commandArgs[3]));
@@ -62,7 +59,7 @@ public class Engine implements IEngine {
                     }
                     break;
                 case"Remove":
-                    for (Weapon weapon1 : this.weapons) {
+                    for (IWeapon weapon1 : this.weapons) {
                         if (weapon1.getName().equals(commandArgs[1])){
                             int indexToRemove = Integer.parseInt(commandArgs[2]);
                             this.factory.removeGemFromAWeapon(weapon1,indexToRemove);
@@ -71,7 +68,7 @@ public class Engine implements IEngine {
                     }
                     break;
                 case"Print":
-                    for (Weapon weapon1 : this.weapons) {
+                    for (IWeapon weapon1 : this.weapons) {
                         if (weapon1.getName().equals(commandArgs[1])){
                             this.writer.write(this.factory.printWeapon(weapon1));
                             break;
